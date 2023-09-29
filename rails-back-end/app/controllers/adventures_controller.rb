@@ -18,6 +18,6 @@ class AdventuresController < ApplicationController
     end
 
     def adventure_params
-        params.permit(:prompt, :ratings, :description. :title, :comments)
+        params.permit(:prompt, :ratings, :description, :title, :comments)
     end
 end
