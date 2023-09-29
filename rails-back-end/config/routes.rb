@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :items
+  resources :items, :only => [:create, :destroy]
   resources :adventures
-  resources :characters, :only => [:create]
+  resources :characters, :only => [:create, :destroy, :update]
 
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
