@@ -2,10 +2,26 @@ class CharactersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
 
-    #POST /create
+    #POST /characters
     def create
         character = Character.create!(character_params)
         render json: character, status: :created
+    end
+
+    #PATCH /characters/:id
+    def update
+        user = User.find(session[:user_id])
+        character = user.characters.find(params[:id])
+        character.update!(character_params)
+        render json: character, status: :ok
+    end
+
+    #DELETE /charcters/:id
+    def destroy
+        user = User.find(session[:user_id])
+        character = user.characters.find(params[:id])
+        character.destroy
+        head :no_content
     end
 
     private
