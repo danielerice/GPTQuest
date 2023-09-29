@@ -2,10 +2,18 @@ class ItemsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
 
-    #POST /create
+    #POST /items
     def create
         item = Item.create!(item_params)
         render json: item, status: :created
+    end
+
+    #DELETE /items/:id
+    def destroy
+        user = User.find(session[:user_id])
+        item = user.items.find(params[:id])
+        item.destroy
+        head :no_content
     end
 
     private

@@ -28,7 +28,7 @@ class AdventuresController < ApplicationController
 
     #DELETE /adventures/:id
     def destroy
-        user = User.find(session[user_id])
+        user = User.find(session[:user_id])
         adventure = user.adventures.find(params[:id])
         adventure.destroy
         head :no_content
