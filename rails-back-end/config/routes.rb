@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :adventures
   resources :characters, :only => [:create]
 
   post '/signup', to: 'users#create'
