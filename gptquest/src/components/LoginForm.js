@@ -10,7 +10,7 @@ function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
-    function loginUser (event) {
+    async function loginUser (event) {
         event.preventDefault();
 
         const formData = {
@@ -28,7 +28,16 @@ function LoginForm() {
         };
 
         console.log("login alert!!", formData)
-    }
+
+        const response = await fetch(`/login`, configObj);
+        const newLogin = await response.json();
+
+        if (response.status === 201) {
+            setUser(newLogin)
+        } else {
+            console.log("login fail",newLogin.errors)
+        }
+    };
     
     
     return (

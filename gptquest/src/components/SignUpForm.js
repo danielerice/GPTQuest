@@ -11,7 +11,7 @@ function SignUpForm() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     
-    function createNewUser (event) {
+    async function createNewUser (event) {
         event.preventDefault();
         
         const formData = {
@@ -30,6 +30,19 @@ function SignUpForm() {
             };
         
         console.log("new user alert!!", formData)
+
+        const response = await fetch(`/signup`, configObj);
+        const newUser = await response.json()
+
+        if (response.status === 201) {
+            setUser(newUser)
+          } else {
+            console.log(newUser.errors)
+          }
+
+        setUsername("")
+        setPassword("")
+        setConfirmPassword("")
     }
     
     

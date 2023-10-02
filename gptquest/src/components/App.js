@@ -1,10 +1,12 @@
 import '../App.css';
 import React, { useContext } from "react";
 import {Route, Routes} from "react-router-dom"
-import NavBar from "./NavBar"
+import NavBar from "./NavBar";
 import SignIn from './SignIn';
-import Home from "./Home"
-import {UserContext} from "../contexts/UserContext"
+import Home from "./Home";
+import Store from './Store';
+import MyQuests from './MyQuests';
+import {UserContext} from "../contexts/UserContext";
 import { AdventureContext } from '../contexts/AdventureContext';
 
 function App() {
@@ -17,17 +19,31 @@ function App() {
   if (true) {
     return (
     <>
-        <NavBar key={'navBar'}/>
-        <Routes>
-          
-          <Route 
-            path="/"
-            element={
-              <Home/>
-          }
-          ></Route>
-          
-          </Routes>
+      <NavBar key={'navBar'}/>
+      <Routes>
+        
+        <Route 
+          path="/"
+          element={
+            <Home/>
+        }
+        ></Route>
+
+        <Route 
+          path="/store"
+          element={
+            <Store/>
+        }
+        ></Route>
+
+        <Route 
+          path="/myquests"
+          element={
+            <MyQuests/>
+        }
+        ></Route>
+        
+        </Routes>
     </>
     )}
 }
