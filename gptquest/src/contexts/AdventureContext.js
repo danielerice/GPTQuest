@@ -4,7 +4,7 @@ import {useEffect, useState, createContext} from "react";
 
 const AdventureContext = createContext();
 
-function AdventureContext({ children }) {
+function AdventureProvider({ children }) {
 
     const [adventure, setAdventure] = useState(null);
 

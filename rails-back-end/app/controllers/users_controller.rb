@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
 
+    skip_before_action :verify_authenticity_token
     #GET /me
     def show
         user = User.find(session[:user_id])
