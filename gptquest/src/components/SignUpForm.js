@@ -44,7 +44,7 @@ function SignUpForm() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     />
-                <label>Passowrd:</label>
+                <label>Password:</label>
                 <input
                     type="text"
                     id="password"
@@ -52,7 +52,7 @@ function SignUpForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
-                <label>Confirm Passowrd:</label>
+                <label>Confirm Password:</label>
                 <input
                     type="text"
                     id="confirmPassword"
