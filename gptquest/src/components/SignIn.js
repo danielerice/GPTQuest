@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import LoginForm from "./LoginForm"
 import SignUpForm from "./SignUpForm"
+import Logo from "./bits/Logo";
 
 function SignIn() {
 
@@ -8,7 +9,7 @@ function SignIn() {
 
     return (
         <>
-            <p>LOOOOGOOOOOOOO</p>
+            <Logo fontSize={80}/>
                 <div>
                     {newUser ? (
                         <div>

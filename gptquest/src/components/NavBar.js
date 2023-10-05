@@ -7,8 +7,14 @@ function NavBar() {
     //User context for logout button
     const {setUser} = useContext(UserContext);
 
-    function logoutUser (event) {
+    //fires when logout button is clicked deletes session
+    async function logoutUser (event) {
+        event.preventDefault();
+
         console.log("logout user alert!!")
+
+        const response = await fetch(`/logout`, { method: "DELETE" })
+        setUser("")
     }
 
     return (

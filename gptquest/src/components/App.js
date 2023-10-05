@@ -6,6 +6,7 @@ import SignIn from './SignIn';
 import Home from "./Home";
 import Store from './Store';
 import MyQuests from './MyQuests';
+import ActiveQuest from './ActiveQuest';
 import {UserContext} from "../contexts/UserContext";
 import { AdventureContext } from '../contexts/AdventureContext';
 
@@ -13,9 +14,9 @@ function App() {
 
   const {user, setUser} = useContext(UserContext);
   const {adventures, setAdventures} = useContext(AdventureContext);
+console.log(user)
 
-
-  if (!false) return <SignIn/>
+  if (!user) return <SignIn/>
   if (true) {
     return (
     <>
@@ -42,6 +43,13 @@ function App() {
             <MyQuests/>
         }
         ></Route>
+
+        <Route
+          path='/activequest'
+          element={
+            <ActiveQuest/>
+          }
+          />
         
         </Routes>
     </>
