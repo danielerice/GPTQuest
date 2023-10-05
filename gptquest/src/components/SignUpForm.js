@@ -50,30 +50,33 @@ function SignUpForm() {
         <div>
             <form onSubmit={createNewUser}>
                 <label>Username:</label>
-                <input
+                <input className="signin-form-box"
                     type="text"
                     id="username"
                     autoComplete="off"
+                    placeholder="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     />
                 <label>Password:</label>
-                <input
+                <input className="signin-form-box"
                     type="text"
                     id="password"
                     autoComplete="off"
+                    placeholder="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
                 <label>Confirm Password:</label>
-                <input
+                <input className="signin-form-box"
                     type="text"
                     id="confirmPassword"
                     autoComplete="off"
+                    placeholder="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                <input type="submit" value="Create Account"></input>
+                <div className="center"><button className="pixel2" type="submit">Create Account</button></div>
             </form>
         </div>
     )

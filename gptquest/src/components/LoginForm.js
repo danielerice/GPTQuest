@@ -44,22 +44,24 @@ function LoginForm() {
         <div>
         <form onSubmit={loginUser}>
             <label>Username:</label>
-            <input
+            <input className="signin-form-box"
                 type="text"
                 id="username"
                 autoComplete="off"
+                placeholder="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 />
             <label>Password:</label>
-            <input
+            <input className="signin-form-box"
                 type="text"
                 id="password"
                 autoComplete="off"
+                placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 />
-            <input type="submit" value="Login"></input>
+            <div className="center"><button type="submit" className="pixel2">Login</button></div>
         </form>
     </div>
     )

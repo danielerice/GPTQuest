@@ -1,8 +1,11 @@
 body {
   margin: 0;
   font-family: 'VT323', monospace;
+  font-size: 30px;
+  color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
 }
 
 code {
