@@ -20,24 +20,24 @@ function NavBar() {
     return (
         <div className="NavBar">
             <Link to="/">
-                <p className="logo">
+                <p className="NavLogo">
                     GPTQUEST
                 </p>
             </Link>
 
-            <Link to="/store">
+            <Link className="NavLink" to="/store">
                 <p>
                     Store
                 </p>
             </Link>
 
-            <Link to="/myquests">
+            <Link className="NavLink" to="/myquests">
                 <p>
                     My Quests
                 </p>
             </Link>
 
-            <button onClick={(e) => logoutUser(e)}>Logout</button>
+            <button className="pixel" onClick={(e) => logoutUser(e)}>Logout</button>
         </div>
     )
 }
