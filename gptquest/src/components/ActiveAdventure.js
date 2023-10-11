@@ -1,9 +1,9 @@
 import React from "react";
 
-function ActiveQuest () {
+function ActiveAdventure () {
     return (
         <p>Active Quest</p>
     )
 }
 
-export default ActiveQuest;
+export default ActiveAdventure;

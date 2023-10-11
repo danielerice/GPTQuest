@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AdventureContext } from "../contexts/AdventureContext";
 
-function NewQuestForm() {
+function NewAdventureForm() {
 
     const {adventures, setAdventures} = useContext(AdventureContext);
     const [title, setTitle] = useState("");
@@ -42,4 +42,4 @@ function NewQuestForm() {
     )
 }
 
-export default NewQuestForm;
+export default NewAdventureForm;

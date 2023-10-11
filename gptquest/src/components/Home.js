@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import { AdventureContext } from "../contexts/AdventureContext";
 import AdventureCard from "./AdventureCard";
-import CommunityAdventures from "./CommunityQuests";
-import NewQuestForm from "./NewQuestForm";
+import CommunityAdventures from "./CommunityAdventuress";
+import NewAdventureForm from "./NewAdventureForm";
 
 function Home() {
 
@@ -14,7 +14,7 @@ function Home() {
     return (
         <div className="home">
             <div className="container">
-                <NewQuestForm/>
+                <NewAdventureForm/>
             </div>
             <div className="container">
                 <CommunityAdventures/>

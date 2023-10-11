@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import SignIn from './SignIn';
 import Home from "./Home";
 import Store from './Store';
-import ActiveQuest from './ActiveQuest';
+import ActiveQuest from './ActiveAdventure';
 import {UserContext} from "../contexts/UserContext";
 import { AdventureContext } from '../contexts/AdventureContext';
 import MyAdventures from './MyAdventures';
