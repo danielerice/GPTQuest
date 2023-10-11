@@ -27,7 +27,7 @@ function LoginForm() {
             body: JSON.stringify(formData)
         };
 
-        console.log("login alert!!", formData)
+        // console.log("login alert!!", formData)
 
         const response = await fetch(`/login`, configObj);
         const newLogin = await response.json();

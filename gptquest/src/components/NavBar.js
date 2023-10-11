@@ -31,13 +31,13 @@ function NavBar() {
                 </p>
             </Link>
 
-            <Link className="NavLink" to="/myquests">
+            <Link className="NavLink" to="/myadventures">
                 <p>
-                    My Quests
+                    My Adventures
                 </p>
             </Link>
 
-            <button className="pixel" onClick={(e) => logoutUser(e)}>Logout</button>
+            <button className="pixel2 fixedButton" onClick={(e) => logoutUser(e)}>Logout</button>
         </div>
     )
 }

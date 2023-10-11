@@ -1,8 +1,14 @@
 import React from "react";
 
-function ItemCard() {
+function ItemCard({item}) {
     return (
-        <p>ItemCard</p>
+        <div className="container">
+            <p>{item.title}</p>
+            <p>IMAGE</p>
+            <p>{item.cost.toString()}</p>
+            <p>{item.description}</p>
+            <button>BUY</button>
+        </div>
     )
 }
 

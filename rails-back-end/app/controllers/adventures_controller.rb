@@ -16,7 +16,8 @@ class AdventuresController < ApplicationController
 
     #GET /adventures
     def index
-        render json: Adventure.all, status: :ok
+        adventures = Adventure.all
+        render json: adventures, status: :ok
     end
 
     #PATCH /adventures/:id

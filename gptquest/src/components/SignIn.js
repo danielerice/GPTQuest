@@ -15,13 +15,13 @@ function SignIn() {
                         <div>
                             <LoginForm />
                             <p>Don't have an account?</p>
-                            <div className="center"><button className="pixel2" onClick={() => setNewUser(false)}><p>Sign Up</p></button></div>
+                            <div className="center"><button className="pixel2" onClick={() => setNewUser(false)}>Sign Up</button></div>
                         </div>
                         ) : (
                             <div>
                                 <SignUpForm />
                                 <p>Already have an account?</p>
-                                <div className="center"><button className="pixel2" onClick={() => setNewUser(true)}><p>Login</p></button></div>
+                                <div className="center"><button className="pixel2" onClick={() => setNewUser(true)}>Login</button></div>
                             </div>
                              )}
                     </div>

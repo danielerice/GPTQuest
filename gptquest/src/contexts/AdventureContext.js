@@ -6,19 +6,19 @@ const AdventureContext = createContext();
 
 function AdventureProvider({ children }) {
 
-    const [adventure, setAdventure] = useState(null);
+    const [adventures, setAdventures] = useState(null);
 
-    // useEffect(() => {
-    //     fetch('/me')
-    //     .then((r) => {
-    //         if (r.ok) {
-    //             r.json().then((user) => setUser(user))
-    //           }
-    //     })
-    // }, [])
+    useEffect(() => {
+        fetch('/adventures')
+        .then((r) => {
+            if (r.ok) {
+                r.json().then((adventures) => setAdventures(adventures))
+              }
+        })
+    }, [])
 
 
-    return <AdventureContext.Provider value={{adventure, setAdventure}}>{children}</AdventureContext.Provider>
+    return <AdventureContext.Provider value={{adventures, setAdventures}}>{children}</AdventureContext.Provider>
 }
 
 export {AdventureContext, AdventureProvider};

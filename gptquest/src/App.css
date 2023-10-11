@@ -40,26 +40,30 @@
 .NavBar {
   top: 0%;
   position: absolute;
-  height: 4%;
+  height: 6vh;
   width: 100%;
   right: 0%;
   display: flex;
   justify-content: end;
   white-space: nowrap;
   overflow: hidden;
-  background-color: #737264;
+  background-color: gold;
 }
 
 .NavLink {
   position: relative;
-  margin-right: 30px;
-  margin-top: 5px;
+  margin-right: 13vh;
+  margin-top: .5vh;
   font-family: 'Silkscreen', "sans-serif";
   font-weight: 400;
-  font-size: 20px;
+  font-size: 2.5vh;
   line-height: 0px;
-  color: #FFD15B;
+  color: black;
+  text-decoration: none;
+}
 
+.NavLink:hover{
+  color:#737264;
 }
 
 .center {
@@ -74,10 +78,12 @@
 
 .NavLogo {
   font-family: 'Silkscreen', sans-serif;
-  color: #FFD15B;
-  left: 10px;
-  top: -25px;
+  color: black;
+  text-shadow: 0px 2px 0px#737264;
+  left: 2vh;
+  top: -3.5vh;
   position: absolute;
+  font-size: 4vh;
 }
 
 
@@ -96,75 +102,11 @@ input[type=text], select {
   padding: 20px;
 }
 
-.pixel, .pixel2 {
-  all: unset;
-  font-size: 25px;
-  color: white;
-  height: auto;
-  margin: 10px;
-  font-family: 'VT323';
-  
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  text-transform: uppercase;
-  
-  cursor: default;
-  
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
-.pixel:active, .pixel2:active {
+.pixel2:active {
   top: 2px;
 }
 
-.pixel {
-  line-height: 0;
-  
-  image-rendering: optimizeSpeed;
-  image-rendering: -moz-crisp-edges; /* Firefox */
-  image-rendering: -o-crisp-edges; /* Opera */
-  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
-  
-  border-style: solid;
-  border-width: 20px;
-  -moz-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
-  -webkit-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
-  -o-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
-  border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
-}
-
-.pixel p {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  width: auto;
-  text-align: center;
-  margin: -20px -20px;
-  line-height: 20px;
-  padding: 10px 20px;
-  
-	background: black;
-	background:
-		linear-gradient(135deg, transparent 10px, black 0) top left,
-		linear-gradient(225deg, transparent 10px, black 0) top right,
-		linear-gradient(315deg, transparent 10px, black 0) bottom right,
-		linear-gradient(45deg,  transparent 10px, black 0) bottom left;
-	background-size: 50% 50%;
-	background-repeat: no-repeat;
-	background-image:
-		radial-gradient(circle at 0 0, #FFD15B 14px, #FFD15B 15px),
-		radial-gradient(circle at 100% 0, #FFD15B 14px, #FFD15B 15px),
-		radial-gradient(circle at 100% 100%, #FFD15B 14px, #FFD15B 15px),
-		radial-gradient(circle at 0 100%, #FFD15B 14px, #FFD15B 15px);
-}
 
 .pixel2 {
   all: unset;
@@ -209,4 +151,22 @@ input[type=text], select {
   height: auto;
   width: auto;
   z-index: 2;
+}
+
+.fixedButton {
+  height: 2.5vh;
+  width: 1vh;
+  position: absolute;
+  right: 2vh;
+  top: -1vh;
+  font-size: 2vh;
+  padding: 5px 5px;
+}
+
+.adventureCard{
+  background-color: #737264;
+  border: 2px solid white;
+  width: 40vh;
+  height: 60vh;
+  overflow: wrap;
 }

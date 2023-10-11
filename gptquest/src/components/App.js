@@ -5,19 +5,19 @@ import NavBar from "./NavBar";
 import SignIn from './SignIn';
 import Home from "./Home";
 import Store from './Store';
-import MyQuests from './MyQuests';
 import ActiveQuest from './ActiveQuest';
 import {UserContext} from "../contexts/UserContext";
 import { AdventureContext } from '../contexts/AdventureContext';
+import MyAdventures from './MyAdventures';
 
 function App() {
 
   const {user, setUser} = useContext(UserContext);
   const {adventures, setAdventures} = useContext(AdventureContext);
-console.log(user)
+// console.log(user)
 
   if (!user) return <SignIn/>
-  if (true) {
+  if (adventures) {
     return (
     <>
       <NavBar key={'navBar'}/>
@@ -38,9 +38,9 @@ console.log(user)
         ></Route>
 
         <Route 
-          path="/myquests"
+          path="/myadventures"
           element={
-            <MyQuests/>
+            <MyAdventures/>
         }
         ></Route>
 
