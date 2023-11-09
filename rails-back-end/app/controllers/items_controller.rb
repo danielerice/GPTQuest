@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
 
     #POST /items
     def create
-        item = Item.create!(item_params)
+        user = User.find(session[:user_id])
+        item = user.items.create!(item_params)
         render json: item, status: :created
     end
 
@@ -26,6 +27,6 @@ class ItemsController < ApplicationController
     end
 
     def item_params
-        params.permit(:title, :user_id, :context)
+        params.permit(:title, context: [])
     end
 end

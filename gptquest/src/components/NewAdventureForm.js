@@ -9,9 +9,34 @@ function NewAdventureForm() {
     const [description, setDescription] = useState("")
 
     async function createNewAdventure (event) {
-        //this will submit a new quest into db, update state, send API call to GPT, and redirect user to "ActiveAdventure" comp
-        event.preventDefault();
-        console.log(`${title}, has been created with prompt: ${prompt}`)
+        //this will submit a new quest into db with an assosiated character, update state, send API call to GPT, and redirect user to "ActiveAdventure" comp
+        //event.preventDefault();
+
+        const formData = {
+            "title": title,
+            "description": description,
+            "prompt": prompt
+            };
+          
+        const configObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(formData)
+        };
+
+        const response = await fetch(`/adventures`, configObj);
+        const newAdventure = await response.json();
+
+        if (response.status === 201) {
+           const updatedAdventures = adventures
+           updatedAdventures.push(newAdventure)
+           setAdventures(updatedAdventures)
+            } else {
+            console.log(response.errors)
+            }
     }
 
 
@@ -42,8 +67,8 @@ function NewAdventureForm() {
                     id="description"
                     autoComplete="off"
                     placeholder="description"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     />
                 <div className="center"><button className="pixel2" type="submit">Begin</button></div>
             </form>

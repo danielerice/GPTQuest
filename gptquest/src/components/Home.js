@@ -1,13 +1,12 @@
 import React, {useContext} from "react";
-//import { AdventureContext } from "../contexts/AdventureContext";
-//import AdventureCard from "./AdventureCard";
+import { AdventureContext } from "../contexts/AdventureContext";
+import AdventureCard from "./AdventureCard";
 import CommunityAdventures from "./CommunityAdventuress";
 import NewAdventureForm from "./NewAdventureForm";
 
 function Home() {
 
-    //const {adventures, setAdventures} = useContext(AdventureContext);
-    // console.log(adventures)
+    const {adventures, setAdventures} = useContext(AdventureContext);
 
 
 

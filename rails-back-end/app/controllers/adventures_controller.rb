@@ -1,10 +1,15 @@
 class AdventuresController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
+    skip_before_action :authorize
+    skip_before_action :verify_authenticity_token
+
 
     #POST /adventures
     def create
-        adventure = Adventure.create!(character_params)
+        adventure = Adventure.create!(adventure_params)
+        adventure.update!(originator: session[:user_id])
+        adventure.characters.create!( user_id: session[:user_id], context: [(adventure_params[:prompt])])
         render json: adventure, status: :created
     end
 
@@ -16,7 +21,8 @@ class AdventuresController < ApplicationController
 
     #GET /adventures
     def index
-        adventures = Adventure.all
+        #adventures = Adventure.all
+        adventures = Adventure.order(:id)
         render json: adventures, status: :ok
     end
 
@@ -45,6 +51,6 @@ class AdventuresController < ApplicationController
     end
 
     def adventure_params
-        params.permit(:prompt, :ratings, :description, :title, :comments)
+        params.permit(:prompt, :ratings, :description, :title, :comments, :id)
     end
 end
