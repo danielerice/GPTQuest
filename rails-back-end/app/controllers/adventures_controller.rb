@@ -7,8 +7,9 @@ class AdventuresController < ApplicationController
 
     #POST /adventures
     def create
-        adventure = Adventure.create!(adventure_params)
-        adventure.update!(originator: session[:user_id])
+        adventure = Adventure.new(adventure_params)
+        adventure.originator = session[:user_id]
+        adventure.save
         adventure.characters.create!( user_id: session[:user_id], context: [(adventure_params[:prompt])])
         render json: adventure, status: :created
     end
@@ -51,6 +52,6 @@ class AdventuresController < ApplicationController
     end
 
     def adventure_params
-        params.permit(:prompt, :ratings, :description, :title, :comments, :id)
+        params.permit(:prompt, :ratings, :description, :title, :comments, :id, :originator)
     end
 end

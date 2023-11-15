@@ -5,4 +5,5 @@ class Adventure < ApplicationRecord
     validates :title, presence: true
     validates :prompt, presence: true
     validates :description, presence: true
+    validates :originator, presence: true
 end
