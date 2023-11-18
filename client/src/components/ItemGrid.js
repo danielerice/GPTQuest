@@ -34,13 +34,12 @@ const hat = {
 
 
 
-function ItemGrid () {
+function ItemGrid ({selected, setSelected}) {
 
     const {user, setUser} = useContext(UserContext);
     const items = [sword, beans, hat]
 
-    //selected state for item card, pass set function to item
-    const [selected, setSelected] = useState();
+
 
     function createStoreGrid() {
         const grid = []

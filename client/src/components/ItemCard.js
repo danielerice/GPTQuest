@@ -47,11 +47,11 @@ function ItemCard({item, selected, setSelected}) {
     }
 
     return (
-        <div className="itemCard" style={selected === item.title ? selectedStyle : unselectedStyle}>
+        <div className="itemCard" style={selected === item ? selectedStyle : unselectedStyle}>
             <p>{item.title}</p>
             <p style={itemStyleObj} >{item.description}</p>
             <p>{item.cost.toString()}</p>
-            <button type="button" onClick={(e) => setSelected(item.title)}>Select</button>
+            <button type="button" onClick={(e) => setSelected(item)}>Select</button>
         </div>
     )
 }

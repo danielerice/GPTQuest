@@ -12,7 +12,10 @@ const {user, setUser} = useContext(UserContext);
         const updatedAdventures = user.adventures.filter((curr) => curr.id !== adventure.id );
         const updatedUser = user
         updatedUser.adventures = updatedAdventures
-        setUser(updatedUser);
+        setUser(updatedUser); //this does not cause myAdventures component to reload
+
+        // Reload the page
+        window.location.reload();
     }
 
     return (

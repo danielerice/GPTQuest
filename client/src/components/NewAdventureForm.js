@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import ItemGrid from "./ItemGrid";
+import {useNavigate} from 'react-router-dom';
 
 function NewAdventureForm() {
 
@@ -9,14 +10,25 @@ function NewAdventureForm() {
     const [prompt, setPrompt] = useState("");
     const [description, setDescription] = useState("");
 
+    //selected state for item card, pass set function to item
+    const [selected, setSelected] = useState();
+
+    //link to activeAdventure
+    const navigate = useNavigate();
+    const linkAdventure = () => navigate('/activeadventure');
+
+
     async function createNewAdventure (event) {
         //this will submit a new quest into db with an assosiated character and item, update state, send API call to GPT, and redirect user to "ActiveAdventure" comp
         event.preventDefault();
 
+
         const formData = {
             "title": title,
             "description": description,
-            "prompt": prompt
+            "prompt": prompt,
+            "item_title": selected.title,
+            "context": selected.context
             };
           
         const configObj = {
@@ -41,7 +53,8 @@ function NewAdventureForm() {
             console.log(response.errors)
             }
 
-        //link to activeAdventure
+            linkAdventure()
+
     }
 
 
@@ -75,7 +88,10 @@ function NewAdventureForm() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     />
-                <ItemGrid/>
+                <ItemGrid
+                    selected={selected}
+                    setSelected={setSelected}
+                />
                 <div className="center"><button className="pixel2" type="submit">Begin</button></div>
             </form>
         </div>

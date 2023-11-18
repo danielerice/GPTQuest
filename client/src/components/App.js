@@ -43,7 +43,7 @@ function App() {
         ></Route>
 
         <Route
-          path='/activequest'
+          path='/activeadventure'
           element={
             <ActiveQuest/>
           }

@@ -88,7 +88,7 @@ function AdventureCard ({adventure}) {
     } else {
         return(
             <div className="adventureCard">
-                <p>{adventure.title}</p><EditButton adventure={adventure} setTarget={setTarget}/><DeleteButton  adventure={adventure}/>
+                <p>{adventure.title}</p><EditButton adventure={adventure} setTarget={setTarget} /><DeleteButton  adventure={adventure} />
                 <p>{adventure.description}</p>
                 <p>{adventure.rating}</p>
                 <button className="pixel2">Begin</button>
