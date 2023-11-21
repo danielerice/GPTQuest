@@ -9,19 +9,19 @@ function SignIn() {
 
     return (
         <>
-            <div className="center"><Logo fontSize={80}/></div>
-                <div className="center">
+            <div className="container"><Logo fontSize={80}/></div>
+                <div className="col-6 mx-auto">
                     {newUser ? (
                         <div>
                             <LoginForm />
                             <p>Don't have an account?</p>
-                            <div className="center"><button className="pixel2" onClick={() => setNewUser(false)}>Sign Up</button></div>
+                            <div className="col-2 mx-auto"><button className="pixel2" onClick={() => setNewUser(false)}>Sign Up</button></div>
                         </div>
                         ) : (
                             <div>
                                 <SignUpForm />
                                 <p>Already have an account?</p>
-                                <div className="center"><button className="pixel2" onClick={() => setNewUser(true)}>Login</button></div>
+                                <div className="col-2 mx-auto"><button className="pixel2" onClick={() => setNewUser(true)}>Login</button></div>
                             </div>
                              )}
                     </div>

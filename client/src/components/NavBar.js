@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import Logo from "./bits/Logo";
 
 function NavBar() {
 
@@ -16,23 +17,27 @@ function NavBar() {
         const response = await fetch(`/logout`, { method: "DELETE" })
         setUser("")
     }
+    const style = {padding: "0rem"}
 
     return (
-        <div className="NavBar">
-            <Link to="/">
-                <p className="NavLogo">
-                    GPTQUEST
-                </p>
-            </Link>
-
-            <Link className="NavLink" to="/myadventures">
-                <p>
-                    My Adventures
-                </p>
-            </Link>
-
-            <button className="pixel2 fixedButton" onClick={(e) => logoutUser(e)}>Logout</button>
-        </div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid ">
+                <a className="navbar-brand" href="/"><Logo fontSize={40} color={"black"}/></a>
+                <div className="d-flex">
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <button className="" href="/myadventures">My Adventures</button>
+                    </li>
+                    <li className="nav-item">
+                        <button className="">Info</button>
+                    </li>
+                    <li>
+                        <button onClick={(e) => logoutUser(e)} className="">Logout</button>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
     )
 }
 export default NavBar;

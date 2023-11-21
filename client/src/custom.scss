@@ -1,0 +1,43 @@
+$primary:       #FFD15B;
+$secondary:     #ebdcb5;
+$success:       #69ca34;
+$info:          #34ca89;
+$warning:       #e7e302;
+$danger:        #da4d26;
+$light:         rgb(142, 142, 142);
+$dark:          rgb(69, 69, 69);
+
+$theme-colors: (
+  "primary":    #FFD15B,
+  "secondary":  #ebdcb5,
+  "success":    #69ca34,
+  "info":       #34ca89,
+  "warning":    #e7e302,
+  "danger":     #da4d26,
+  "light":      #FFD15B,
+  "dark":       rgb(69, 69, 69)
+);
+
+
+$input-font-size: 1rem;
+$font-family-base: 'Silkscreen', sans-serif;
+$bs-body-color: white;
+$body-color:                #FFD15B;
+$body-bg:                   black;
+
+$body-secondary-color:      rgba(155, 155, 155, 0.51);
+$body-secondary-bg:         #FFD15B;
+
+$body-tertiary-color:       #ebdcb5;
+$body-tertiary-bg:          #FFD15B;
+
+$body-emphasis-color:       #da4d26;
+
+$navbar-brand-padding-y: 0rem;
+
+
+
+
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+

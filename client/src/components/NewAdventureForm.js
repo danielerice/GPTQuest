@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import ItemGrid from "./ItemGrid";
 import {useNavigate} from 'react-router-dom';
+import { AdventureContext } from "../contexts/AdventureContext";
 
 function NewAdventureForm() {
 
     const {user, setUser} = useContext(UserContext);
+    const {setAdventure} = useContext(AdventureContext);
     const [title, setTitle] = useState("");
     const [prompt, setPrompt] = useState("");
     const [description, setDescription] = useState("");
@@ -49,6 +51,7 @@ function NewAdventureForm() {
            const updatedUser = user
            updatedUser.adventures = updatedAdventures
            setUser(updatedUser)
+           setAdventure(newAdventure)
             } else {
             console.log(response.errors)
             }
@@ -59,41 +62,60 @@ function NewAdventureForm() {
 
 
     return (
-        <div>
-            <form onSubmit={createNewAdventure}>
-                <label>Title:</label>
-                <input className="signin-form-box"
-                    type="text"
-                    id="title"
-                    autoComplete="off"
-                    placeholder="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+        <div className="row">
+            <div className="col-6 offset-3">
+                <form onSubmit={createNewAdventure}>
+
+                    
+                        <label for="title" >Title:</label>
+                        <input className="form-control"
+                            type="text"
+                            id="title"
+                            placeholder="title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            />
+                        
+
+                    
+                        <label for="description">Description:</label>
+                        <textarea className="form-control"
+                            type="text"
+                            id="description"
+                            placeholder="description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            />
+                        
+
+                    
+                    
+                        <label for="prompt">Prompt:</label>
+                        <textarea className="form-control"
+                            type="text"
+                            id="prompt"
+                            placeholder="prompt"
+                            value={prompt}
+                            onChange={(e) => setPrompt(e.target.value)}
+                            />
+                        
+
+                    
+
+
+                    <ItemGrid
+                        selected={selected}
+                        setSelected={setSelected}
                     />
-                <label>Prompt:</label>
-                <input className="signin-form-box"
-                    type="text"
-                    id="prompt"
-                    autoComplete="off"
-                    placeholder="prompt"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    />
-                <label>Description:</label>
-                <input className="signin-form-box"
-                    type="text"
-                    id="description"
-                    autoComplete="off"
-                    placeholder="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    />
-                <ItemGrid
-                    selected={selected}
-                    setSelected={setSelected}
-                />
-                <div className="center"><button className="pixel2" type="submit">Begin</button></div>
-            </form>
+
+                    <div className="row">
+                        <div className="col-2 offset-5">
+                            <button className="btn btn-primary" type="submit">Begin</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
         </div>
     )
 }

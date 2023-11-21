@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
 import EditButton from "./bits/EditButton";
-import DeleteButton from "./bits/DeleteButton";
 import { UserContext } from "../contexts/UserContext";
 
-function AdventureCard ({adventure}) {
+function AdventureCard ({ adventure }) {
 
     const {user, setUser} = useContext(UserContext);
     const [target, setTarget] = useState(0);
@@ -48,6 +47,16 @@ function AdventureCard ({adventure}) {
 
     }
 
+    function deleteAdventure () {
+        //deletes adventure when clicked
+        console.log("click")
+        const response = fetch(`/adventures/${adventure.id}`, { method: 'DELETE' });
+        const updatedAdventures = user.adventures.filter((curr) => curr.id !== adventure.id );
+        const updatedUser = user
+        updatedUser.adventures = updatedAdventures
+        setUser({...updatedUser});
+    }
+
     
     if (target === adventure.id) {
         return(
@@ -88,7 +97,7 @@ function AdventureCard ({adventure}) {
     } else {
         return(
             <div className="adventureCard">
-                <p>{adventure.title}</p><EditButton adventure={adventure} setTarget={setTarget} /><DeleteButton  adventure={adventure} />
+                <p>{adventure.title}</p><EditButton adventure={adventure} setTarget={setTarget} /><button onClick={() => deleteAdventure()}>X</button>
                 <p>{adventure.description}</p>
                 <p>{adventure.rating}</p>
                 <button className="pixel2">Begin</button>

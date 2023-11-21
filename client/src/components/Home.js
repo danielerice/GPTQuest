@@ -1,13 +1,16 @@
 import React from "react";
 import NewAdventureForm from "./NewAdventureForm";
+import Logo from "./bits/Logo";
 
 function Home() {
 
     return (
         <div className="container">
-            <div className="p-3 mb-2 bg-light text-dark">
-                <h1 className="">Welcome to GPTQuest!</h1>
-                <p>Here you can begin your adventures with any prompt and pick from one of three items</p>
+            <div className="row">
+                <div className="col-6 offset-3">
+                    <h1 className="display-1"><Logo/></h1>{/* Make this a splashy logo */}
+                    <p style={{color: "white"}}>Here you can begin your adventures with any prompt and pick from one of three items</p>
+                </div>
             </div>
             <div className="container">
                 <NewAdventureForm/>
