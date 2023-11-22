@@ -141,6 +141,6 @@ input[type=password], select {
   font-size: 3vh;
 }
 
-.label{
-  color: aliceblue;
+.bttn{
+  width: 100%;
 }

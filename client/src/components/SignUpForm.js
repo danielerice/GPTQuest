@@ -47,38 +47,43 @@ function SignUpForm() {
     
     
     return (
-        <div>
-            <form onSubmit={createNewUser}>
-                <label>Username:</label>
-                <input className="signin-form-box"
-                    type="text"
-                    id="username"
-                    autoComplete="off"
-                    placeholder="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    />
-                <label>Password:</label>
-                <input className="signin-form-box"
-                    type="password"
-                    id="password"
-                    autoComplete="off"
-                    placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    />
-                <label>Confirm Password:</label>
-                <input className="signin-form-box"
-                    type="password"
-                    id="confirmPassword"
-                    autoComplete="off"
-                    placeholder="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                <div className="center"><button className="pixel2" type="submit">Create Account</button></div>
-            </form>
-        </div>
+            <div className="row align-items-center justify-content-center">
+                <div className="col-6">
+                    <form onSubmit={createNewUser}>
+                        <label>Username:</label>
+                        <input className="form-control"
+                            type="text"
+                            id="username"
+                            autoComplete="off"
+                            placeholder="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            />
+                        <label>Password:</label>
+                        <input className="form-control"
+                            type="password"
+                            id="password"
+                            autoComplete="off"
+                            placeholder="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            />
+                        <label>Confirm Password:</label>
+                        <input className="form-control"
+                            type="password"
+                            id="confirmPassword"
+                            autoComplete="off"
+                            placeholder="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+
+                        <div className="col-4 offset-4">
+                            <button className="bttn" type="submit">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
     )
 }
 export default SignUpForm;

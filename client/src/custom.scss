@@ -18,7 +18,7 @@ $theme-colors: (
   "dark":       rgb(69, 69, 69)
 );
 
-
+$border-radius: 0;
 $input-font-size: 1rem;
 $font-family-base: 'Silkscreen', sans-serif;
 $bs-body-color: white;
@@ -35,6 +35,9 @@ $body-emphasis-color:       #da4d26;
 
 $navbar-brand-padding-y: 0rem;
 
+$card-bg: grey;
+$card-border-radius: $border-radius;
+$card-border-color: white;
 
 
 

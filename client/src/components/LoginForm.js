@@ -39,29 +39,43 @@ function LoginForm() {
     
     
     return (
-        <div>
-        <form onSubmit={loginUser}>
-            <label>Username:</label>
-            <input className="signin-form-box"
-                type="text"
-                id="username"
-                autoComplete="off"
-                placeholder="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                />
-            <label>Password:</label>
-            <input className="signin-form-box"
-                type="password"
-                id="password"
-                autoComplete="off"
-                placeholder="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />
-            <div className="center"><button type="submit" className="pixel2">Login</button></div>
-        </form>
-    </div>
+        <div className="row row align-items-center justify-content-center">
+            <div className="col-6">
+                <form onSubmit={loginUser}>
+                    <div className="row align-items-center justify-content-center">
+                        <div className="col-12">
+                            <label>Username:</label>
+                            <input className="form-control"
+                                type="text"
+                                id="username"
+                                autoComplete="off"
+                                placeholder="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                />
+                        </div>
+                    </div>
+                    <div className="row align-items-center justify-content-center">
+                        <div className="col-12">
+                            <label>Password:</label>
+                            <input className="form-control"
+                                type="password"
+                                id="password"
+                                autoComplete="off"
+                                placeholder="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                />
+                        </div>
+                    </div>
+                    <div className="row align-items-center justify-content-center">
+                        <div className="col-2">
+                            <button type="submit" className="bttn">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     )
 }
 export default LoginForm;

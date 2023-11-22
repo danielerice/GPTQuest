@@ -8,7 +8,7 @@ function Home() {
         <div className="container">
             <div className="row">
                 <div className="col-6 offset-3">
-                    <h1 className="display-1"><Logo/></h1>{/* Make this a splashy logo */}
+                    <h1 className="display-1"><Logo fontSize={95}/></h1>{/* Make this a splashy logo */}
                     <p style={{color: "white"}}>Here you can begin your adventures with any prompt and pick from one of three items</p>
                 </div>
             </div>

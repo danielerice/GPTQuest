@@ -25,7 +25,7 @@ function ItemCard({item, selected, setSelected}) {
             <p>{item.title}</p>
             <p style={itemStyleObj} >{item.description}</p>
             <p>{item.cost.toString()}</p>
-            <button type="button" className="btn" onClick={(e) => setSelected(item)}>Select</button>
+            <button type="button" className="bttn" onClick={(e) => setSelected(item)}>Select</button>
         </div>
     )
 }

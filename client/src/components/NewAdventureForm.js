@@ -68,7 +68,7 @@ function NewAdventureForm() {
 
                     
                         <label for="title" >Title:</label>
-                        <input className="form-control"
+                        <textarea className="form-control"
                             type="text"
                             id="title"
                             placeholder="title"
