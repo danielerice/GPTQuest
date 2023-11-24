@@ -21,11 +21,20 @@ function ItemCard({item, selected, setSelected}) {
     }
 
     return (
-        <div className="card" style={selected === item ? selectedStyle : unselectedStyle}>
-            <p>{item.title}</p>
-            <p style={itemStyleObj} >{item.description}</p>
-            <p>{item.cost.toString()}</p>
-            <button type="button" className="bttn" onClick={(e) => setSelected(item)}>Select</button>
+        <div className="col-12">
+            <div class="card text-center" style={selected === item ? selectedStyle : unselectedStyle}>
+                <div class="card-header">
+                        {item.type}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{item.title}</h5>
+                    <p class="card-text">{item.description}</p>
+                    <button type="button" onClick={(e) => setSelected(item)} className="bttn">select</button>
+                </div>
+                <p class="card-footer">
+                    {`${item.cost.toString()} gold`}
+                </p>
+            </div>
         </div>
     )
 }

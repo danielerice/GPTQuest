@@ -10,6 +10,7 @@ function SignUpForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [alert, setAlert] = useState(null);
     
     async function createNewUser (event) {
         event.preventDefault();
@@ -38,6 +39,7 @@ function SignUpForm() {
             setUser(newUser)
           } else {
             console.log(newUser.errors)
+            setAlert(newUser.errors)
           }
 
         setUsername("")
@@ -49,6 +51,7 @@ function SignUpForm() {
     return (
             <div className="row align-items-center justify-content-center">
                 <div className="col-6">
+                    {alert ? <div class='alert alert-danger alert-dismissible fade show' role="alert"><strong>Holy guacamole!</strong> {alert}<button type="button" class="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></>}
                     <form onSubmit={createNewUser}>
                         <label>Username:</label>
                         <input className="form-control"

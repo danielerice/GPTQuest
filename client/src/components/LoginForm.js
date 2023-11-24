@@ -9,10 +9,11 @@ function LoginForm() {
     //Login controlled form values
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [alert, setAlert] = useState(null)
     
     async function loginUser (event) {
         event.preventDefault();
-
+        console.log("login")
         const formData = {
             "username": username,
             "password": password
@@ -33,7 +34,8 @@ function LoginForm() {
         if (response.status === 201) {
             setUser(newLogin)
         } else {
-            console.log("login fail",newLogin.errors)
+            console.log(response)
+            setAlert("Wrong username or password")
         }
     };
     
@@ -41,6 +43,7 @@ function LoginForm() {
     return (
         <div className="row row align-items-center justify-content-center">
             <div className="col-6">
+                {alert ? <div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Holy guacamole!</strong> {alert}<button type="button" class="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></>}
                 <form onSubmit={loginUser}>
                     <div className="row align-items-center justify-content-center">
                         <div className="col-12">

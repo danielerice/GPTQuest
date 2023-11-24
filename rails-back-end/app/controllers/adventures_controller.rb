@@ -21,7 +21,6 @@ class AdventuresController < ApplicationController
 
     #GET /adventures
     def index
-        #adventures = Adventure.all
         adventures = Adventure.order(:id)
         render json: adventures, status: :ok
     end
@@ -43,11 +42,11 @@ class AdventuresController < ApplicationController
 
     private
     def unprocessable_entity_response invalid
-        render json: {errors: [invalid.message]}, status: :unprocessable_entity
+        render json: {errors: invalid.message}, status: :unprocessable_entity
     end
 
     def record_not_found_response invalid
-        render json: {errors: [invalid.message]}, status: :not_found
+        render json: {errors: invalid.message}, status: :not_found
     end
 
     def adventure_params

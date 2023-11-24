@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 import { UserContext } from "../contexts/UserContext";
 import Logo from "./bits/Logo";
 
@@ -7,6 +8,10 @@ function NavBar() {
 
     //User context for logout button
     const {setUser} = useContext(UserContext);
+
+    //link to myAdventures
+    const navigate = useNavigate();
+    const linkMyAdventures = () => navigate('/myadventures');
 
     //fires when logout button is clicked deletes session
     async function logoutUser (event) {
@@ -26,10 +31,7 @@ function NavBar() {
                 <div className="d-flex">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <button className="" href="/myadventures">My Adventures</button>
-                    </li>
-                    <li className="nav-item">
-                        <button className="">Info</button>
+                        <button className="" onClick={(e) => linkMyAdventures()}>My Adventures</button>
                     </li>
                     <li>
                         <button onClick={(e) => logoutUser(e)} className="">Logout</button>

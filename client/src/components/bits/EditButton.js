@@ -6,7 +6,7 @@ function EditButton ({adventure, setTarget}) {
 
 
     return (
-        <button onClick={() => setTarget(adventure.id)}><EditIcon/></button>
+        <button className="btn btn-outline-primary btn-sm" onClick={() => setTarget(adventure.id)}>edit</button>
     )
 }
 

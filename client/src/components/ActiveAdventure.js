@@ -7,12 +7,15 @@ let count = 0
 
 function ActiveAdventure () {
 
+  const key = process.env.REACT_APP_OPEN_AI_KEY
+
   //Current Adventure pulled from Adventure Context
   const {adventure, setAdventure} = useContext(AdventureContext);
 
+
   //state based vars
   const [responses, setResponses] = useState([]);
-  const [currResponse, setCurrResponse] = useState("This will be the result of your prompt good sir");
+  const [currResponse, setCurrResponse] = useState(null);
   const [resText, setResText] = useState("")
   const [prompt, setPrompt] = useState(adventure.prompt)
   //array of objs for api, updated when user submits new prompts
@@ -24,11 +27,15 @@ function ActiveAdventure () {
     {
       "role": "user",
       "content": adventure.prompt
+    },
+    {
+      "role" : "user",
+      "content": `Start with an item called ${adventure.items[0].title}. It's ${adventure.items[0].context[0]}`
     }
   ])
 
   //openai related vars
-  const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
+  const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
   
 
   //asynchronously call API with context
@@ -57,6 +64,7 @@ function ActiveAdventure () {
 
   //fires onClick
   async function send() {
+    setCurrResponse(null)
 
     //sends new call to OpenAI with new user input
     let sendContext = contextArray
@@ -95,13 +103,15 @@ function ActiveAdventure () {
   }
   }, [])
 
+  const style = { width: "7rem", height: "7rem" }
+
 
     return (
-        <div className="center aligned container" style={{marginTop: "8vh"}}>
+        <div className="container align-content-center" style={{marginTop: "8vh"}}>
           <div className="col">
-            <h1>What will you do..?</h1>
-            <p>{currResponse}</p>
-            <input type="text" placeholder="what do you do?" id="resText" name="resText" required minLength="0" maxLength="180" size="10" onChange={(e) => setResText(e.target.value)}/>
+            <h1>{adventure.title}</h1>
+            { currResponse ? <p>{currResponse}</p> : <div class="d-flex justify-content-center"><div class="spinner-border" role="status" style={style}><span class="visually-hidden">Loading...</span></div></div>}
+            <input className="form-control" type="text" placeholder="what will you do?" id="resText" name="resText" required minLength="0" maxLength="180" size="10" onChange={(e) => setResText(e.target.value)}/>
             <button onClick={(e) => send(e)}>Send</button>
           </div>  
         </div>

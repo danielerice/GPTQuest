@@ -24,10 +24,10 @@ class SessionController < ApplicationController
 
     private
     def unprocessable_entity_response invalid
-        render json: {errors: [invalid.message]}, status: :unprocessable_entity
+        render json: {errors: invalid.message}, status: :unprocessable_entity
     end
 
     def record_not_found_response invalid
-        render json: {errors: [invalid.message]}, status: :not_found
+        render json: {errors: invalid.message}, status: :not_found
     end
 end

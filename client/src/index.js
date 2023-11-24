@@ -8,6 +8,7 @@ import { AdventureProvider } from './contexts/AdventureContext';
 
 // Importing the Bootstrap CSS
 import './index.css';
+import 'bootstrap/dist/js/bootstrap.min.js'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
