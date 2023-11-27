@@ -31,9 +31,6 @@ function ItemCard({item, selected, setSelected}) {
                     <p class="card-text">{item.description}</p>
                     <button type="button" onClick={(e) => setSelected(item)} className="bttn">select</button>
                 </div>
-                <p class="card-footer">
-                    {`${item.cost.toString()} gold`}
-                </p>
             </div>
         </div>
     )

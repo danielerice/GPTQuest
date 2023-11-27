@@ -16,6 +16,7 @@ function AdventureCard ({ currAdventure }) {
     const [title, setTitle] = useState(currAdventure.title);
     const [prompt, setPrompt] = useState(currAdventure.prompt);
     const [description, setDescription] = useState(currAdventure.description)
+    const [alert, setAlert] = useState(null)
     
     async function startAdventure (event) {
         event.preventDefault();
@@ -60,7 +61,7 @@ function AdventureCard ({ currAdventure }) {
             setUser({...updatedUser})
             setAdventure({...patchedAdventure})
         } else {
-            console.log(response.errors)
+            setAlert("Adventure varibles can't be blank")
         }
 
     }
@@ -86,6 +87,7 @@ function AdventureCard ({ currAdventure }) {
                     </div>
                 </div>
                 <div className="card-body">
+                {alert ? <div class='alert alert-danger alert-dismissible fade show' role="alert">{alert}<button type="button" class="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></> }
                 <h2 class="card-header">
                     {currAdventure.title}
                 </h2>

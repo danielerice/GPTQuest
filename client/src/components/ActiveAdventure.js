@@ -7,7 +7,8 @@ let count = 0
 
 function ActiveAdventure () {
 
-  const key = process.env.REACT_APP_OPEN_AI_KEY
+  const key = process.env.REACT_APP_OPENAI_KEY
+  console.log(key)
 
   //Current Adventure pulled from Adventure Context
   const {adventure, setAdventure} = useContext(AdventureContext);
@@ -35,7 +36,7 @@ function ActiveAdventure () {
   ])
 
   //openai related vars
-  const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
+  const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
   
 
   //asynchronously call API with context
