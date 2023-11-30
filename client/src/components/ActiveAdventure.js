@@ -36,7 +36,7 @@ function ActiveAdventure () {
   ])
 
   //openai related vars
-  const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
+  const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
   
 
   //asynchronously call API with context

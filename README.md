@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Welcome To GPTQuest!!!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I built this site using [React](https://reactjs.org/) and [Rails](https://rubyonrails.org/) in the hopes that someone out there would get as much joy out of the storytelling as I do.
 
-## Available Scripts
+This is my capstone project for [Flatiron](https://base.flatironschool.com/), and as such it reflects what I learned on my way through the curriculum there. I incorporated all the front and backend skills taught to me to the best of my ability and learned even more along the way. I also stetched my understadning of both external API useage and AI language models by utilzing [OpenAI's](https://openai.com/) chat function and the GPT 3.5 Turbo therein.
 
-In the project directory, you can run:
+# Cloning the Repository
 
-### `npm start`
+Open your terminal.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone the repository to your local machine by replacing <your-username> with your GitHub username:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```c
+git clone https://github.com/<your-username>/your-repo.git
+```
 
-### `npm test`
+Change into the project's directory:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```c
+cd your-repo
+```
 
-### `npm run build`
+# Setting Up Rails Backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Ensure you have Ruby installed. You can check this by running:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```c
+ruby -v
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If not, install Ruby from [here](https://www.ruby-lang.org/en/documentation/installation/)
 
-### `npm run eject`
+Install the required gems:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```c
+bundle install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Set up the database:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```c
+rails db:create db:migrate
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Start the Rails server:
 
-## Learn More
+```c
+rails server
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The Rails server will be running at http://localhost:3000.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Setting Up React Frontend
 
-### Code Splitting
+Ensure you have Node.js installed. You can check this by running:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```c
+node -v
+```
 
-### Analyzing the Bundle Size
+If not, install Node.js from [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Install the required packages:
 
-### Making a Progressive Web App
+```c
+cd client
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Start the React development server:
 
-### Advanced Configuration
+```c
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The React development server will be running at http://localhost:3001.
 
-### Deployment
+Now you have successfully set up the Rails and React app on your local machine!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Happy coding! 🚀
 
-### `npm run build` fails to minify
+# Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This app is designed to be used as a text based adventuring game. Users make accounts and send api calls to openai with carefully constructed context parameters I have chosen specifically to result in predictable resposnes.
+Thank you so much for taking the time to read this and try out the app, I worked hard on it! Enjoy!!
