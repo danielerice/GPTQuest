@@ -2,8 +2,6 @@ import React, {useContext, useState, useEffect} from "react";
 import OpenAI from "openai";
 import { AdventureContext } from "../contexts/AdventureContext";
 
-let count = 0
-
 
 function ActiveAdventure () {
 
@@ -17,7 +15,6 @@ function ActiveAdventure () {
   //state based vars
   const [currResponse, setCurrResponse] = useState(null);
   const [resText, setResText] = useState("")
-  //const [prompt, setPrompt] = useState(adventure.prompt)
   //array of objs for api, updated when user submits new prompts
   const [contextArray, setContextArray] = useState([
     {
@@ -34,39 +31,6 @@ function ActiveAdventure () {
     }
   ])
 
-  
-  
-  //asynchronously call API with context
-  async function callOpenAi() {
-
-    //get key
-    const keyResponse = await fetch('/creds')
-    const key = await keyResponse.json()
-  
-
-    //get vars
-    const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
-
-    //chat init
-    const response = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
-      messages: contextArray,
-      temperature: 1,
-      max_tokens: 4069,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-    });
-    setCurrResponse(response.choices[0].message.content)
-    let updatedContext = contextArray
-    updatedContext.push({
-      "content": response.choices[0].message.content,
-      "role": "assistant"
-    })
-    setContextArray(updatedContext)
-
-
-  }
 
   //fires onClick
   async function send() {
@@ -109,36 +73,51 @@ function ActiveAdventure () {
   //fires inital call and sets the first response to set the scene
   useEffect(() => {
 
-    if(count === 0){
-    callOpenAi()
-    count = count + 1
-  } else {
+    //asynchronously call API with context
+    async function callOpenAi() {
 
-  }
+      //get key
+      const keyResponse = await fetch('/creds')
+      const key = await keyResponse.json()
+    
+  
+      //get vars
+      const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
+  
+      //chat init
+      const response = await openai.chat.completions.create({
+        model: "gpt-4-1106-preview",
+        messages: contextArray,
+        temperature: 1,
+        max_tokens: 4069,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      });
+      setCurrResponse(response.choices[0].message.content)
+      let updatedContext = contextArray
+      updatedContext.push({
+        "content": response.choices[0].message.content,
+        "role": "assistant"
+      })
+      setContextArray(updatedContext)
+    }
+    callOpenAi()
   }, [])
 
   const style = { width: "7rem", height: "7rem" }
 
-    if(adventure.prompt){
+
     return (
         <div className="container align-content-center" style={{marginTop: "8vh"}}>
           <div className="col">
             <h1>{adventure.title}</h1>
-            { currResponse ? <p>{currResponse}</p> : <div class="d-flex justify-content-center"><div class="spinner-border" role="status" style={style}><span class="visually-hidden">Loading...</span></div></div>}
+            { currResponse ? <p>{currResponse}</p> : <div className="d-flex justify-content-center"><div className="spinner-border" role="status" style={style}><span className="visually-hidden">Loading...</span></div></div>}
             <input className="form-control" type="text" placeholder="what will you do?" id="resText" name="resText" required minLength="0" maxLength="180" size="10" onChange={(e) => setResText(e.target.value)}/>
             <button onClick={(e) => send(e)}>Send</button>
           </div>  
         </div>
-    )} else {
-      return (
-        <div className="container align-content-center" style={{marginTop: "8vh"}}>
-        <div className="col">
-          <h1>Your adventure has failed to load. Try resubmitting from My Adventures</h1>
-          
-        </div>  
-      </div>
-      )
-    }
+    )
 }
 
 export default ActiveAdventure;

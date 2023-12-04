@@ -1,11 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 
 function ItemCard({item, selected, setSelected}) {
 
-
-    const itemStyleObj = {
-        fontSize: "2vh"
-    }
 
     const selectedStyle = {
         borderColor: "#FFD15B",
@@ -16,19 +12,15 @@ function ItemCard({item, selected, setSelected}) {
         borderColor: "grey"
     }
 
-    function handleCheck(e) {
-        console.log("check")
-    }
-
     return (
         <div className="col-12">
-            <div class="card text-center" style={selected === item ? selectedStyle : unselectedStyle}>
-                <div class="card-header">
+            <div className="card text-center" style={selected === item ? selectedStyle : unselectedStyle}>
+                <div className="card-header">
                         {item.type}
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">{item.title}</h5>
-                    <p class="card-text">{item.description}</p>
+                <div className="card-body">
+                    <h5 className="card-title">{item.title}</h5>
+                    <p className="card-text">{item.description}</p>
                     <button type="button" onClick={(e) => setSelected(item)} className="bttn">select</button>
                 </div>
             </div>

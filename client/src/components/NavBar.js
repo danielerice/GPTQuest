@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
 import { UserContext } from "../contexts/UserContext";
 import Logo from "./bits/Logo";
@@ -19,10 +18,10 @@ function NavBar() {
 
         console.log("logout user alert!!")
 
-        const response = await fetch(`/logout`, { method: "DELETE" })
+        fetch(`/logout`, { method: "DELETE" })
         setUser("")
     }
-    const style = {padding: "0rem"}
+
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">

@@ -11,7 +11,7 @@ import MyAdventures from './MyAdventures';
 
 function App() {
 
-  const {user, setUser} = useContext(UserContext);
+  const {user} = useContext(UserContext);
 
 
   if (!user) return <SignIn/>

@@ -43,7 +43,7 @@ function LoginForm() {
     return (
         <div className="row row align-items-center justify-content-center">
             <div className="col-6">
-                {alert ? <div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Holy guacamole!</strong> {alert}<button type="button" class="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></>}
+                {alert ? <div className="alert alert-danger alert-dismissible fade show" role="alert"><strong>Holy guacamole!</strong> {alert}<button type="button" className="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></>}
                 <form onSubmit={loginUser}>
                     <div className="row align-items-center justify-content-center">
                         <div className="col-12">

@@ -1,5 +1,4 @@
 import React from "react";
-import {ReactComponent as EditIcon} from "./EditIcon.svg"
 
 function EditButton ({adventure, setTarget}) {
 

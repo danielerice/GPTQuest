@@ -10,7 +10,7 @@ function AdventureCard ({ currAdventure }) {
     const navigate = useNavigate();
     const linkAdventure = () => navigate('/activeadventure');
 
-    const {adventure, setAdventure} = useContext(AdventureContext);
+    const {setAdventure} = useContext(AdventureContext);
     const {user, setUser} = useContext(UserContext);
     const [target, setTarget] = useState(0);
     const [title, setTitle] = useState(currAdventure.title);
@@ -69,7 +69,7 @@ function AdventureCard ({ currAdventure }) {
     function deleteAdventure () {
         //deletes adventure when clicked
         console.log("click")
-        const response = fetch(`/adventures/${currAdventure.id}`, { method: 'DELETE' });
+        fetch(`/adventures/${currAdventure.id}`, { method: 'DELETE' });
         const updatedAdventures = user.adventures.filter((curr) => curr.id !== currAdventure.id );
         const updatedUser = user
         updatedUser.adventures = updatedAdventures
@@ -87,8 +87,8 @@ function AdventureCard ({ currAdventure }) {
                     </div>
                 </div>
                 <div className="card-body">
-                {alert ? <div class='alert alert-danger alert-dismissible fade show' role="alert">{alert}<button type="button" class="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></> }
-                <h2 class="card-header">
+                {alert ? <div className='alert alert-danger alert-dismissible fade show' role="alert">{alert}<button type="button" className="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></> }
+                <h2 className="card-header">
                     {currAdventure.title}
                 </h2>
                 <form onSubmit={patchAdventure}>
@@ -137,13 +137,13 @@ function AdventureCard ({ currAdventure }) {
                         <h3 className="card-header">{currAdventure.title} </h3>
                     </div>
                 </div>
-                <h4 class="card-text">Prompt:</h4>
+                <h4 className="card-text">Prompt:</h4>
                 <ul className="list-group">
-                <p class="list-group-item">{currAdventure.prompt}</p>
+                <p className="list-group-item">{currAdventure.prompt}</p>
                 </ul>
-                <h4 class="card-text">Description:</h4>
+                <h4 className="card-text">Description:</h4>
                 <ul className="list-group">
-                <p class="list-group-item">{currAdventure.description}</p>
+                <p className="list-group-item">{currAdventure.description}</p>
                 </ul>
                 <button className="btn btn-outline-secondary" type="button" onClick={(e) => startAdventure(e)}>Begin</button>
             </div>

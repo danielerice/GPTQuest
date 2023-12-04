@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import ItemCard from "./ItemCard";
-import { UserContext } from "../contexts/UserContext";
+
 
 const sword = {
     title: "Sword of Slicing",
@@ -39,7 +39,6 @@ const hat = {
 
 function ItemGrid ({selected, setSelected}) {
 
-    const {user, setUser} = useContext(UserContext);
     const items = [sword, beans, hat]
 
 
@@ -48,7 +47,7 @@ function ItemGrid ({selected, setSelected}) {
         const grid = []
         for (let i=0; i < items.length; i++) {
             grid.push(
-                <div className="row justify-content-center align-content-center gy-3">
+                <div key={i} className="row justify-content-center align-content-center gy-3">
                     <div className="col-10">{items[i] ? <ItemCard key={items[i].title} item={items[i]} setSelected={setSelected} selected={selected} />: console.log("nah") }</div>
                     <div className="col-10">{items[i+1] ? <ItemCard key={items[i+1].title} item={items[i+1]} setSelected={setSelected} selected={selected}/> : console.log("nah") }</div>
                     <div className="col-10">{items[i+2] ? <ItemCard key={items[i+1].title} item={items[i+2]} setSelected={setSelected} selected={selected}/> : console.log("nah") }</div>

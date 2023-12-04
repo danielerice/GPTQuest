@@ -68,18 +68,18 @@ function NewAdventureForm({setAlert}) {
     return (
         <div className="container justify-content-center align-content-center">
             <div className="row">
-                <div class="accordion" id="accordionPanelsStayOpenExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                <div className="accordion" id="accordionPanelsStayOpenExample">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="panelsStayOpen-headingOne">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                             Step 1: Choose Adventure Variables
                             </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                            <div class="accordion-body">
+                        <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div className="accordion-body">
                                 <div className="col-10 offset-1">
                                     <form>
-                                        <label for="title" >Title:</label>
+                                        <label htmlFor="title" >Title:</label>
                                         <textarea className="form-control"
                                             type="text"
                                             id="title"
@@ -87,7 +87,7 @@ function NewAdventureForm({setAlert}) {
                                             value={title}
                                             onChange={(e) => setTitle(e.target.value)}
                                             />
-                                        <label for="description">Description:</label>
+                                        <label htmlFor="description">Description:</label>
                                         <textarea className="form-control"
                                             type="text"
                                             id="description"
@@ -95,7 +95,7 @@ function NewAdventureForm({setAlert}) {
                                             value={description}
                                             onChange={(e) => setDescription(e.target.value)}
                                             />
-                                        <label for="prompt">Prompt:</label>
+                                        <label htmlFor="prompt">Prompt:</label>
                                         <textarea className="form-control"
                                             type="text"
                                             id="prompt"
@@ -108,14 +108,14 @@ function NewAdventureForm({setAlert}) {
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="panelsStayOpen-headingTwo">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                             Step 2: Choose Starting Equipment
                             </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                            <div class="accordion-body">
+                        <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div className="accordion-body">
                             <ItemGrid
                                     selected={selected}
                                     setSelected={setSelected}
