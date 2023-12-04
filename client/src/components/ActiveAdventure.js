@@ -18,7 +18,7 @@ function ActiveAdventure () {
   const [responses, setResponses] = useState([]);
   const [currResponse, setCurrResponse] = useState(null);
   const [resText, setResText] = useState("")
-  const [prompt, setPrompt] = useState(adventure.prompt)
+  //const [prompt, setPrompt] = useState(adventure.prompt)
   //array of objs for api, updated when user submits new prompts
   const [contextArray, setContextArray] = useState([
     {
@@ -120,7 +120,7 @@ function ActiveAdventure () {
 
   const style = { width: "7rem", height: "7rem" }
 
-
+    if(adventure.prompt){
     return (
         <div className="container align-content-center" style={{marginTop: "8vh"}}>
           <div className="col">
@@ -130,7 +130,16 @@ function ActiveAdventure () {
             <button onClick={(e) => send(e)}>Send</button>
           </div>  
         </div>
-    ) 
+    )} else {
+      return (
+        <div className="container align-content-center" style={{marginTop: "8vh"}}>
+        <div className="col">
+          <h1>Your adventure has failed to load. Try resubmitting from My Adventures</h1>
+          
+        </div>  
+      </div>
+      )
+    }
 }
 
 export default ActiveAdventure;
