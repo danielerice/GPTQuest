@@ -11,11 +11,10 @@ function ActiveAdventure () {
 
 
   //Current Adventure pulled from Adventure Context
-  const {adventure, setAdventure} = useContext(AdventureContext);
+  const {adventure} = useContext(AdventureContext);
 
 
   //state based vars
-  const [responses, setResponses] = useState([]);
   const [currResponse, setCurrResponse] = useState(null);
   const [resText, setResText] = useState("")
   //const [prompt, setPrompt] = useState(adventure.prompt)
