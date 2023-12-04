@@ -10,7 +10,7 @@ function SignIn() {
     return (
         <div className="container-fluid">
             <div className="row align-items-center justify-content-center">
-                <div className="col-7">
+                <div className="col-7 offset-3">
                     <Logo fontSize={120}/>
                 </div>
             </div>
@@ -20,12 +20,12 @@ function SignIn() {
                             <LoginForm />
                         <div className="container-fluid">
                             <div className="row align-items-center justify-content-center">
-                                <div className="col-4 offset-1">
-                                    <p>Don't have an account yet?</p>
+                                <div className="col-1 gy-5 text-center">
+                                    <h2>-  Or  -</h2>
                                 </div>
                             </div>
                             <div className="row align-items-center justify-content-center">
-                                <div className="col-2">
+                                <div className="col-2 gy-5">
                                     <button className="bttn" onClick={() => setNewUser(false)}>Sign Up</button>
                                 </div>
                             </div>
@@ -34,13 +34,13 @@ function SignIn() {
                     ) : (
                         <div className="container-fluid">
                                 <SignUpForm />
-                            <div className="row align-items-center justify-content-center">
-                                <div className="col-5 offset-2">
-                                    <p>Already have an account?</p>
+                                <div className="row align-items-center justify-content-center">
+                                    <div className="col-1 gy-5 text-center">
+                                        <h2>-  Or  -</h2>
+                                    </div>
                                 </div>
-                            </div>
                             <div className="row align-items-center justify-content-center">
-                                <div className="col-1">
+                                <div className="col-1 gy-5">
                                     <button className="bttn" onClick={() => setNewUser(true)}>Login</button>
                                 </div>
                             </div>

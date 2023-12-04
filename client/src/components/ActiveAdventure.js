@@ -7,8 +7,8 @@ let count = 0
 
 function ActiveAdventure () {
 
-  const key = process.env.REACT_APP_OPENAI_KEY
-  console.log(key)
+
+
 
   //Current Adventure pulled from Adventure Context
   const {adventure, setAdventure} = useContext(AdventureContext);
@@ -35,12 +35,18 @@ function ActiveAdventure () {
     }
   ])
 
-  //openai related vars
-  const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
+  
+  
+  //asynchronously call API with context
+  async function callOpenAi() {
+
+    //get key
+    const keyResponse = await fetch('/creds')
+    const key = await keyResponse.json()
   
 
-  //asynchronously call API with context
-  async function fuckOpenAi() {
+    //get vars
+    const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
 
     //chat init
     const response = await openai.chat.completions.create({
@@ -65,6 +71,14 @@ function ActiveAdventure () {
 
   //fires onClick
   async function send() {
+
+    //get key
+    const keyResponse = await fetch('/creds')
+    const key = await keyResponse.json()
+
+    //get vars
+    const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
+    
     setCurrResponse(null)
 
     //sends new call to OpenAI with new user input
@@ -97,7 +111,7 @@ function ActiveAdventure () {
   useEffect(() => {
 
     if(count === 0){
-    fuckOpenAi()
+    callOpenAi()
     count = count + 1
   } else {
 
