@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext, useState} from "react";
 import OpenAI from "openai";
 import { AdventureContext } from "../contexts/AdventureContext";
 
@@ -95,7 +95,6 @@ function ActiveAdventure () {
     });
     setCurrResponse(response.choices[0].message.content)
     let updatedContext = contextArray
-    console.log(contextArray)
     updatedContext.push({
       "content": response.choices[0].message.content,
       "role": "assistant"
@@ -108,7 +107,7 @@ function ActiveAdventure () {
   //fires inital call and sets the first response to set the scene
     if(!init){
     callOpenAi()} else {
-      console.log("init already sent")
+      //console.log("init already sent")
     }
 
   const style = { width: "7rem", height: "7rem" }
