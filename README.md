@@ -11,14 +11,9 @@ Open your terminal.
 Clone the repository to your local machine by replacing <your-username> with your GitHub username:
 
 ```c
-git clone https://github.com/<your-username>/your-repo.git
+git clone https://github.com/danielerice/GPTQuest.git
 ```
 
-Change into the project's directory:
-
-```c
-cd your-repo
-```
 
 # Setting Up Rails Backend
 
