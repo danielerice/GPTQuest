@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from "react";
 import OpenAI from "openai";
 import { AdventureContext } from "../contexts/AdventureContext";
 
+let init = false
 
 function ActiveAdventure () {
 
@@ -70,40 +71,45 @@ function ActiveAdventure () {
     setContextArray(updatedContext)
   }
 
+  //asynchronously call API with context
+  async function callOpenAi() {
+
+
+    //get key
+    const keyResponse = await fetch('/creds')
+    const key = await keyResponse.json()
+  
+
+    //get vars
+    const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
+
+    //chat init
+    const response = await openai.chat.completions.create({
+      model: "gpt-4-1106-preview",
+      messages: contextArray,
+      temperature: 1,
+      max_tokens: 4069,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+    setCurrResponse(response.choices[0].message.content)
+    let updatedContext = contextArray
+    console.log(contextArray)
+    updatedContext.push({
+      "content": response.choices[0].message.content,
+      "role": "assistant"
+    })
+    setContextArray(updatedContext)
+
+    init = true
+  }
+
   //fires inital call and sets the first response to set the scene
-  useEffect(() => {
-
-    //asynchronously call API with context
-    async function callOpenAi() {
-
-      //get key
-      const keyResponse = await fetch('/creds')
-      const key = await keyResponse.json()
-    
-  
-      //get vars
-      const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
-  
-      //chat init
-      const response = await openai.chat.completions.create({
-        model: "gpt-4-1106-preview",
-        messages: contextArray,
-        temperature: 1,
-        max_tokens: 4069,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      });
-      setCurrResponse(response.choices[0].message.content)
-      let updatedContext = contextArray
-      updatedContext.push({
-        "content": response.choices[0].message.content,
-        "role": "assistant"
-      })
-      setContextArray(updatedContext)
+    if(!init){
+    callOpenAi()} else {
+      console.log("init already sent")
     }
-    callOpenAi()
-  }, [])
 
   const style = { width: "7rem", height: "7rem" }
 
