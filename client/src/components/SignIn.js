@@ -20,8 +20,8 @@ function SignIn() {
                             <LoginForm />
                         <div className="container-fluid">
                             <div className="row align-items-center justify-content-center">
-                                <div className="col-1 gy-5 text-center">
-                                    <h2>-  Or  -</h2>
+                                <div className="col-2 gy-5">
+                                    <h2 className="text-center">-Or-</h2>
                                 </div>
                             </div>
                             <div className="row align-items-center justify-content-center">
@@ -35,8 +35,8 @@ function SignIn() {
                         <div className="container-fluid">
                                 <SignUpForm />
                                 <div className="row align-items-center justify-content-center">
-                                    <div className="col-1 gy-5 text-center">
-                                        <h2>-  Or  -</h2>
+                                    <div className="col-2 gy-5">
+                                        <h2 className="text-center">-Or-</h2>
                                     </div>
                                 </div>
                             <div className="row align-items-center justify-content-center">

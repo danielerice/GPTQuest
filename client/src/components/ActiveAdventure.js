@@ -52,6 +52,7 @@ function ActiveAdventure () {
       "role": "user"
     })
     setContextArray(sendContext)
+    setResText("")
 
     const response = await openai.chat.completions.create({
       model: "gpt-4-1106-preview",
@@ -69,6 +70,7 @@ function ActiveAdventure () {
       "role": "assistant"
     })
     setContextArray(updatedContext)
+
   }
 
   //asynchronously call API with context
@@ -112,13 +114,13 @@ function ActiveAdventure () {
 
   const style = { width: "7rem", height: "7rem" }
 
-
+    
     return (
         <div className="container align-content-center" style={{marginTop: "8vh"}}>
           <div className="col">
             <h1>{adventure.title}</h1>
             { currResponse ? <p>{currResponse}</p> : <div className="d-flex justify-content-center"><div className="spinner-border" role="status" style={style}><span className="visually-hidden">Loading...</span></div></div>}
-            <input className="form-control" type="text" placeholder="what will you do?" id="resText" name="resText" required minLength="0" maxLength="180" size="10" onChange={(e) => setResText(e.target.value)}/>
+            <input className="form-control" type="text" placeholder="what will you do?" id="resText" name="resText" required minLength="0" maxLength="180" size="10" value={resText} onChange={(e) => setResText(e.target.value)}/>
             <button onClick={(e) => send(e)}>Send</button>
           </div>  
         </div>

@@ -37,14 +37,14 @@ function SignUpForm() {
 
         if (response.status === 201) {
             setUser(newUser)
+            setUsername("")
+            setPassword("")
+            setConfirmPassword("")
           } else {
             console.log(newUser.errors)
             setAlert(newUser.errors)
           }
 
-        setUsername("")
-        setPassword("")
-        setConfirmPassword("")
     }
     
     
