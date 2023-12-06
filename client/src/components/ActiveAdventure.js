@@ -120,7 +120,7 @@ function ActiveAdventure () {
           <div className="col">
             <h1>{adventure.title}</h1>
             { currResponse ? <p>{currResponse}</p> : <div className="d-flex justify-content-center"><div className="spinner-border" role="status" style={style}><span className="visually-hidden">Loading...</span></div></div>}
-            <input className="form-control" type="text" placeholder="what will you do?" id="resText" name="resText" required minLength="0" maxLength="180" size="10" value={resText} onChange={(e) => setResText(e.target.value)}/>
+            <input className="form-control" type="text" placeholder="pick an option or make your own!" id="resText" name="resText" required minLength="0" maxLength="180" size="10" value={resText} onChange={(e) => setResText(e.target.value)}/>
             <button onClick={(e) => send(e)}>Send</button>
           </div>  
         </div>
