@@ -1,6 +1,9 @@
 import React from "react";
 
-function Logo({fontSize = 88, color = "#FFD15B"}) {
+function Logo() {
+
+    const fontSize = window.innerWidth/12
+    const color = "#FFD15B"
     
     const shadowSize = Math.round(fontSize/16).toString()
     

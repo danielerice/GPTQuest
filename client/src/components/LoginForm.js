@@ -72,7 +72,7 @@ function LoginForm() {
                         </div>
                     </div>
                     <div className="row align-items-center justify-content-center">
-                        <div className="col-2">
+                        <div className="col-3 ">
                             <button type="submit" className="bttn">Login</button>
                         </div>
                     </div>
