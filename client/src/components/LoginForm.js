@@ -41,11 +41,11 @@ function LoginForm() {
     
     
     return (
-        <div className="row row align-items-center justify-content-center">
+        <div className="row justify-content-center">
             <div className="col-6">
                 {alert ? <div className="alert alert-danger alert-dismissible fade show" role="alert"><strong>Holy guacamole!</strong> {alert}<button type="button" className="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></>}
                 <form onSubmit={loginUser}>
-                    <div className="row align-items-center justify-content-center">
+                    <div className="row justify-content-center">
                         <div className="col-12">
                             <label>Username:</label>
                             <input className="form-control"
@@ -58,7 +58,7 @@ function LoginForm() {
                                 />
                         </div>
                     </div>
-                    <div className="row align-items-center justify-content-center">
+                    <div className="row justify-content-center">
                         <div className="col-12">
                             <label>Password:</label>
                             <input className="form-control"
@@ -71,7 +71,7 @@ function LoginForm() {
                                 />
                         </div>
                     </div>
-                    <div className="row align-items-center justify-content-center">
+                    <div className="row justify-content-center">
                         <div className="col-3 ">
                             <button type="submit" className="bttn">Login</button>
                         </div>

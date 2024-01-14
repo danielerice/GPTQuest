@@ -10,8 +10,8 @@ function SignIn() {
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">
-                <div className="col">
-                    <Logo/>
+                <div className="col offset-3">
+                    <Logo colorProp={"#FFD15B"} fontProp={190}/>
                 </div>
             </div>
             <div className="row justify-content-center">

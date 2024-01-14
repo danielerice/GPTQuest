@@ -26,7 +26,7 @@ function NavBar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid ">
-                <a className="navbar-brand" href="/"><Logo fontSize={40} color={"black"}/></a>
+                <a className="navbar-brand" href="/"><Logo fontProp={40} colorProp={"black"}/></a>
                 <div className="d-flex">
                 <ul className="navbar-nav">
                     <li className="nav-item">
