@@ -1,80 +1,126 @@
-# Welcome To GPTQuest!!!
+# 🎲 GPTQuest
 
-I built this site using [React](https://reactjs.org/) and [Rails](https://rubyonrails.org/) in the hopes that someone out there would get as much joy out of the storytelling as I do.
+An AI-powered text adventure game where your imagination is the only limit. Built with React, Rails, and OpenAI's GPT-3.5 Turbo.
 
-This is my capstone project for [Flatiron](https://base.flatironschool.com/), and as such it reflects what I learned on my way through the curriculum there. I incorporated all the front and backend skills taught to me to the best of my ability and learned even more along the way. I also stetched my understadning of both external API useage and AI language models by utilzing [OpenAI's](https://openai.com/) chat function and the GPT 3.5 Turbo therein.
+## ✨ About
 
-# Cloning the Repository
+GPTQuest combines classic text-based adventure gaming with modern AI to create dynamic, personalized storytelling experiences. Each adventure is unique, with GPT-3.5 generating responses based on your choices and character context.
 
-Open your terminal.
+This project was created as my capstone for [Flatiron School](https://flatironschool.com/), showcasing full-stack development skills and creative API integration.
 
-Clone the repository to your local machine by replacing <your-username> with your GitHub username:
+## 🎮 Features
 
-```c
+- **Dynamic Storytelling**: AI-generated narratives that adapt to your choices
+- **Character System**: Create and manage multiple characters across different adventures
+- **Persistent Adventures**: Save your progress and return to your stories anytime
+- **Item Management**: Collect and track items throughout your journey
+- **User Authentication**: Secure accounts with personalized adventure histories
+
+## 🛠️ Tech Stack
+
+**Frontend**: React  
+**Backend**: Ruby on Rails  
+**AI Engine**: OpenAI GPT-3.5 Turbo  
+**Database**: PostgreSQL (or SQLite for development)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Ruby 2.7+ ([Installation Guide](https://www.ruby-lang.org/en/documentation/installation/))
+- Node.js 14+ ([Installation Guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm))
+- An OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+
+### Installation
+
+**1. Clone the repository**
+```bash
 git clone https://github.com/danielerice/GPTQuest.git
+cd GPTQuest
 ```
 
-
-# Setting Up Rails Backend
-
-Ensure you have Ruby installed. You can check this by running:
-
-```c
-ruby -v
-```
-
-If not, install Ruby from [here](https://www.ruby-lang.org/en/documentation/installation/)
-
-Install the required gems:
-
-```c
+**2. Backend Setup**
+```bash
+# Install dependencies
 bundle install
-```
 
-Set up the database:
+# Set up database
+rails db:create db:migrate db:seed
 
-```c
-rails db:create db:migrate
-```
+# Add your OpenAI API key to credentials
+EDITOR="code --wait" rails credentials:edit
+# Add: openai_api_key: your_key_here
 
-Start the Rails server:
-
-```c
+# Start the Rails server
 rails server
 ```
 
-The Rails server will be running at http://localhost:3000.
+The backend will run at `http://localhost:3000`
 
-# Setting Up React Frontend
-
-Ensure you have Node.js installed. You can check this by running:
-
-```c
-node -v
-```
-
-If not, install Node.js from [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-
-Install the required packages:
-
-```c
+**3. Frontend Setup**
+```bash
+# Navigate to client directory
 cd client
+
+# Install dependencies
 npm install
-```
 
-Start the React development server:
-
-```c
+# Start the development server
 npm start
 ```
 
-The React development server will be running at http://localhost:3001.
+The frontend will run at `http://localhost:3001`
 
-Now you have successfully set up the Rails and React app on your local machine!
+## 📖 How to Play
 
-Happy coding! 🚀
+1. **Create an Account**: Sign up to start your adventure
+2. **Create a Character**: Define your character's backstory and traits
+3. **Choose an Adventure**: Select from available quests or create your own
+4. **Make Choices**: The AI responds to your actions and decisions
+5. **Collect Items**: Track your inventory as you progress
+6. **Continue Your Story**: Your progress is saved automatically
 
-# Usage
+## 🗺️ Project Structure
 
-This app is designed to be used as a text based adventuring game. Users make accounts and send api calls to openai with carefully constructed context parameters I have chosen specifically to result in predictable resposnes.
-Thank you so much for taking the time to read this and try out the app, I worked hard on it! Enjoy!!
+```
+GPTQuest/
+├── app/
+│   ├── models/          # Rails models (User, Character, Adventure, Item)
+│   ├── controllers/     # API endpoints
+│   └── ...
+├── client/
+│   ├── src/
+│   │   ├── components/  # React components
+│   │   └── ...
+│   └── package.json
+├── db/
+│   └── migrate/         # Database migrations
+└── config/
+    └── routes.rb        # API routes
+```
+
+## 🤝 Contributing
+
+This is a learning project, but suggestions and feedback are always welcome! Feel free to:
+
+- Open an issue for bugs or feature requests
+- Fork the repo and submit a pull request
+- Share your adventure stories!
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- Built during my time at [Flatiron School](https://flatironschool.com/)
+- Powered by [OpenAI](https://openai.com/)
+- Inspired by classic text adventure games and modern interactive fiction
+
+## 📧 Contact
+
+Created by [@danielerice](https://github.com/danielerice)
+
+---
+
+**Happy adventuring!** 🗡️✨
