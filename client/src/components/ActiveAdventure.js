@@ -1,130 +1,178 @@
-import React, {useContext, useState} from "react";
-import OpenAI from "openai";
+import React, {useContext, useState, useEffect} from "react";
 import { AdventureContext } from "../contexts/AdventureContext";
-
-let init = false
+import { UserContext } from "../contexts/UserContext";
 
 function ActiveAdventure () {
-
-
-
-
-  //Current Adventure pulled from Adventure Context
   const {adventure} = useContext(AdventureContext);
-
-
-  //state based vars
-  const [currResponse, setCurrResponse] = useState(null);
-  const [resText, setResText] = useState("")
-  //array of objs for api, updated when user submits new prompts
-  const [contextArray, setContextArray] = useState([
-    {
-      "role": "system",
-      "content": "You are a game called GPTQuest based on the text based adventure game Zork. You will receive user inputs and respond within a fantasy scenario.  Always respond by first setting the scene and them present the user with 3 options of actions for the user to take."
-    },
-    {
-      "role": "user",
-      "content": adventure.prompt
-    },
-    {
-      "role" : "user",
-      "content": `Start with an item called ${adventure.items[0].title}. It's ${adventure.items[0].context[0]}`
-    }
-  ])
-
-
-  //fires onClick
-  async function send() {
-
-    //get key
-    const keyResponse = await fetch('/creds')
-    const key = await keyResponse.json()
-
-    //get vars
-    const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
-    
-    setCurrResponse(null)
-
-    //sends new call to OpenAI with new user input
-    let sendContext = contextArray
-    sendContext.push({
-      "content": resText,
-      "role": "user"
-    })
-    setContextArray(sendContext)
-    setResText("")
-
-    const response = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
-      messages: sendContext,
-      temperature: 1,
-      max_tokens: 4069,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-    });
-    setCurrResponse(response.choices[0].message.content)
-    let updatedContext = sendContext
-    updatedContext.push({
-      "content": response.choices[0].message.content,
-      "role": "assistant"
-    })
-    setContextArray(updatedContext)
-
-  }
-
-  //asynchronously call API with context
-  async function callOpenAi() {
-
-
-    //get key
-    const keyResponse = await fetch('/creds')
-    const key = await keyResponse.json()
+  const {user} = useContext(UserContext);
   
+  const [currResponse, setCurrResponse] = useState(null);
+  const [resText, setResText] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [characterId, setCharacterId] = useState(null);
+  const [error, setError] = useState(null);
 
-    //get vars
-    const openai = new OpenAI({ apiKey: key.secret_access_key, dangerouslyAllowBrowser: true });
-
-    //chat init
-    const response = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
-      messages: contextArray,
-      temperature: 1,
-      max_tokens: 4069,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-    });
-    setCurrResponse(response.choices[0].message.content)
-    let updatedContext = contextArray
-    updatedContext.push({
-      "content": response.choices[0].message.content,
-      "role": "assistant"
-    })
-    setContextArray(updatedContext)
-
-    init = true
+  // Get CSRF token from cookie
+  function getCsrfToken() {
+    const name = 'csrftoken';
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
   }
 
-  //fires inital call and sets the first response to set the scene
-    if(!init){
-    callOpenAi()} else {
-      //console.log("init already sent")
+  // Get character ID for this user/adventure
+  useEffect(() => {
+    async function fetchCharacter() {
+      try {
+        const response = await fetch('/api/characters/', {
+          credentials: 'include'
+        });
+        
+        if (response.ok) {
+          const characters = await response.json();
+          // Find character for this adventure
+          const char = characters.find(c => c.adventure === adventure.id);
+          
+          if (char) {
+            setCharacterId(char.id);
+            // Start the adventure
+            startAdventure(char.id);
+          } else {
+            setError("No character found for this adventure");
+            setLoading(false);
+          }
+        } else {
+          setError("Failed to load character");
+          setLoading(false);
+        }
+      } catch (err) {
+        setError("Error loading character: " + err.message);
+        setLoading(false);
+      }
     }
 
-  const style = { width: "7rem", height: "7rem" }
+    if (adventure && user) {
+      fetchCharacter();
+    }
+  }, [adventure, user]);
 
+  // Start adventure - get initial AI response
+  async function startAdventure(charId) {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/characters/${charId}/start/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        credentials: 'include'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCurrResponse(data.response);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Failed to start adventure");
+      }
+    } catch (err) {
+      setError("Error starting adventure: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Send user input and get AI response
+  async function send(e) {
+    e.preventDefault();
     
-    return (
-        <div className="container align-content-center" style={{marginTop: "8vh"}}>
-          <div className="col">
-            <h1>{adventure.title}</h1>
-            { currResponse ? <p>{currResponse}</p> : <div className="d-flex justify-content-center"><div className="spinner-border" role="status" style={style}><span className="visually-hidden">Loading...</span></div></div>}
-            <input className="form-control" type="text" placeholder="pick an option or make your own!" id="resText" name="resText" required minLength="0" maxLength="180" size="10" value={resText} onChange={(e) => setResText(e.target.value)}/>
-            <button onClick={(e) => send(e)}>Send</button>
-          </div>  
-        </div>
-    )
+    if (!resText.trim()) return;
+
+    setLoading(true);
+    setCurrResponse(null);
+
+    try {
+      const response = await fetch(`/api/characters/${characterId}/generate/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          input: resText
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCurrResponse(data.response);
+        setResText("");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Failed to generate response");
+      }
+    } catch (err) {
+      setError("Error: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const style = { width: "7rem", height: "7rem" };
+
+  return (
+    <div className="container align-content-center" style={{marginTop: "8vh"}}>
+      <div className="col">
+        <h1>{adventure?.title || "Loading..."}</h1>
+        
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
+        
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status" style={style}>
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          currResponse && <p style={{whiteSpace: 'pre-wrap'}}>{currResponse}</p>
+        )}
+        
+        <form onSubmit={send}>
+          <input 
+            className="form-control" 
+            type="text" 
+            placeholder="What do you do?" 
+            value={resText} 
+            onChange={(e) => setResText(e.target.value)}
+            disabled={loading}
+            required
+          />
+          <button 
+            type="submit" 
+            className="btn btn-primary mt-2"
+            disabled={loading || !resText.trim()}
+          >
+            {loading ? "Thinking..." : "Send"}
+          </button>
+        </form>
+      </div>  
+    </div>
+  );
 }
 
 export default ActiveAdventure;

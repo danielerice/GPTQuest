@@ -1,2 +1,19 @@
-django-backend/.env
+ Environment variables
 .env
+*.env
+django-backend/.env
+client/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log*
