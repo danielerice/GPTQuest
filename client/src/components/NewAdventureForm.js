@@ -1,69 +1,70 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../contexts/UserContext";
 import ItemGrid from "./ItemGrid";
 import {useNavigate} from 'react-router-dom';
 import { AdventureContext } from "../contexts/AdventureContext";
 
 function NewAdventureForm({setAlert}) {
-
-    const {user, setUser} = useContext(UserContext);
     const {setAdventure} = useContext(AdventureContext);
     const [title, setTitle] = useState("");
     const [prompt, setPrompt] = useState("");
     const [description, setDescription] = useState("");
-
-
-    //selected state for item card, pass set function to item
     const [selected, setSelected] = useState();
-
-    //link to activeAdventure
     const navigate = useNavigate();
-    const linkAdventure = () => navigate('/activeadventure');
 
+    function getCsrfToken() {
+        const name = 'csrftoken';
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
     async function createNewAdventure (event) {
-        //this will submit a new quest into db with an assosiated character and item, update state, send API call to GPT, and redirect user to "ActiveAdventure" comp
         event.preventDefault();
+        
         if(!selected) {
-            setAlert("You must select an item to continue")
-        } else {
+            setAlert("You must select an item to continue");
+            return;
+        }
 
-        const formData = {
-            "title": title,
-            "description": description,
-            "prompt": prompt,
-            "item_title": selected.title,
-            "context": selected.context
-            };
-          
         const configObj = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json",
+                "X-CSRFToken": getCsrfToken()
             },
-            body: JSON.stringify(formData)
+            credentials: 'include',
+            body: JSON.stringify({
+                title,
+                description,
+                prompt,
+                item_title: selected.title,
+                item_context: selected.context
+            })
         };
 
-        const response = await fetch(`/adventures`, configObj);
-        const newAdventure = await response.json();
+        try {
+            const response = await fetch(`/api/adventures/`, configObj);
+            const newAdventure = await response.json();
 
-        if (response.status === 201) {
-           const updatedAdventures = user.adventures
-           updatedAdventures.push(newAdventure)
-           const updatedUser = user
-           updatedUser.adventures = updatedAdventures
-           setUser(updatedUser)
-           setAdventure(newAdventure)
-           linkAdventure()
+            if (response.ok) {
+                setAdventure(newAdventure);
+                navigate('/activeadventure');
             } else {
-            setAlert("Adventure variables can't be blank")
+                setAlert(newAdventure.error || "Adventure creation failed");
             }
-
-
-}
+        } catch (error) {
+            setAlert("Error creating adventure");
+        }
     }
-
 
     return (
         <div className="container justify-content-center align-content-center">
@@ -79,30 +80,12 @@ function NewAdventureForm({setAlert}) {
                             <div className="accordion-body">
                                 <div className="col-10 offset-1">
                                     <form>
-                                        <label htmlFor="title" >Title:</label>
-                                        <textarea className="form-control"
-                                            type="text"
-                                            id="title"
-                                            placeholder="title"
-                                            value={title}
-                                            onChange={(e) => setTitle(e.target.value)}
-                                            />
+                                        <label htmlFor="title">Title:</label>
+                                        <textarea className="form-control" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
                                         <label htmlFor="description">Description:</label>
-                                        <textarea className="form-control"
-                                            type="text"
-                                            id="description"
-                                            placeholder="description"
-                                            value={description}
-                                            onChange={(e) => setDescription(e.target.value)}
-                                            />
+                                        <textarea className="form-control" type="text" value={description} onChange={(e) => setDescription(e.target.value)} required />
                                         <label htmlFor="prompt">Prompt:</label>
-                                        <textarea className="form-control"
-                                            type="text"
-                                            id="prompt"
-                                            placeholder="prompt"
-                                            value={prompt}
-                                            onChange={(e) => setPrompt(e.target.value)}
-                                            />
+                                        <textarea className="form-control" type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} required />
                                     </form>
                                 </div>
                             </div>
@@ -116,20 +99,17 @@ function NewAdventureForm({setAlert}) {
                         </h2>
                         <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                             <div className="accordion-body">
-                            <ItemGrid
-                                    selected={selected}
-                                    setSelected={setSelected}
-                                />
+                                <ItemGrid selected={selected} setSelected={setSelected} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="col-4 offset-4 gy-4">
-                    <button style={{marginBottom: "4rem"}} className="bttn" type="button" onClick={(e) => createNewAdventure(e)}>Begin</button>
+                    <button style={{marginBottom: "4rem"}} className="bttn" type="button" onClick={createNewAdventure}>Begin</button>
                 </div>
             </div>
-      </div>
-    )
+        </div>
+    );
 }
 
 export default NewAdventureForm;

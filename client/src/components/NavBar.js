@@ -4,24 +4,38 @@ import { UserContext } from "../contexts/UserContext";
 import Logo from "./bits/Logo";
 
 function NavBar() {
-
-    //User context for logout button
     const {setUser} = useContext(UserContext);
-
-    //link to myAdventures
     const navigate = useNavigate();
     const linkMyAdventures = () => navigate('/myadventures');
 
-    //fires when logout button is clicked deletes session
+    function getCsrfToken() {
+        const name = 'csrftoken';
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     async function logoutUser (event) {
         event.preventDefault();
 
-        console.log("logout user alert!!")
-
-        fetch(`/logout`, { method: "DELETE" })
-        setUser("")
+        await fetch(`/api/users/signout/`, { 
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCsrfToken()
+            },
+            credentials: 'include'
+        });
+        setUser(null);
     }
-
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,15 +44,15 @@ function NavBar() {
                 <div className="d-flex">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <button className="" onClick={(e) => linkMyAdventures()}>My Adventures</button>
+                        <button className="" onClick={linkMyAdventures}>My Adventures</button>
                     </li>
                     <li>
-                        <button onClick={(e) => logoutUser(e)} className="">Logout</button>
+                        <button onClick={logoutUser} className="">Logout</button>
                     </li>
                 </ul>
                 </div>
             </div>
         </nav>
-    )
+    );
 }
 export default NavBar;

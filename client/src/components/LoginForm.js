@@ -2,83 +2,96 @@ import React, {useContext, useState} from "react";
 import { UserContext } from "../contexts/UserContext";
 
 function LoginForm() {
-    
-    //user context for loginUser sign in
     const {setUser} = useContext(UserContext);
-
-    //Login controlled form values
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [alert, setAlert] = useState(null)
+    const [alert, setAlert] = useState(null);
+
+    function getCsrfToken() {
+        const name = 'csrftoken';
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
     
     async function loginUser (event) {
         event.preventDefault();
-        console.log("login")
-        const formData = {
-            "username": username,
-            "password": password
-            };
-          
+        
         const configObj = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json",
+                "X-CSRFToken": getCsrfToken()
             },
-            body: JSON.stringify(formData)
+            credentials: 'include',
+            body: JSON.stringify({ username, password })
         };
 
-        const response = await fetch(`/login`, configObj);
-        const newLogin = await response.json();
+        try {
+            const response = await fetch(`/api/users/signin/`, configObj);
+            const data = await response.json();
 
-        if (response.status === 201) {
-            setUser(newLogin)
-        } else {
-            console.log(response)
-            setAlert("Wrong username or password")
+            if (response.ok) {
+                setUser(data);
+            } else {
+                setAlert(data.error || "Login failed");
+            }
+        } catch (error) {
+            setAlert("Login failed");
         }
     };
-    
     
     return (
         <div className="row justify-content-center">
             <div className="col-6">
-                {alert ? <div className="alert alert-danger alert-dismissible fade show" role="alert"><strong>Holy guacamole!</strong> {alert}<button type="button" className="btn-close" onClick={(e) => setAlert(null)} ></button></div> : <></>}
+                {alert && (
+                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Holy guacamole!</strong> {alert}
+                        <button type="button" className="btn-close" onClick={() => setAlert(null)}></button>
+                    </div>
+                )}
                 <form onSubmit={loginUser}>
                     <div className="row justify-content-center">
                         <div className="col-12">
                             <label>Username:</label>
-                            <input className="form-control"
+                            <input 
+                                className="form-control"
                                 type="text"
-                                id="username"
-                                autoComplete="off"
-                                placeholder="username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                />
+                                required
+                            />
                         </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-12">
                             <label>Password:</label>
-                            <input className="form-control"
+                            <input 
+                                className="form-control"
                                 type="password"
-                                id="password"
-                                autoComplete="off"
-                                placeholder="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                />
+                                required
+                            />
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-3 ">
+                        <div className="col-3">
                             <button type="submit" className="bttn">Login</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-    )
+    );
 }
 export default LoginForm;

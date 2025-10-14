@@ -12,7 +12,6 @@ function ActiveAdventure () {
   const [characterId, setCharacterId] = useState(null);
   const [error, setError] = useState(null);
 
-  // Get CSRF token from cookie
   function getCsrfToken() {
     const name = 'csrftoken';
     let cookieValue = null;
@@ -29,7 +28,6 @@ function ActiveAdventure () {
     return cookieValue;
   }
 
-  // Get character ID for this user/adventure
   useEffect(() => {
     async function fetchCharacter() {
       try {
@@ -39,12 +37,10 @@ function ActiveAdventure () {
         
         if (response.ok) {
           const characters = await response.json();
-          // Find character for this adventure
           const char = characters.find(c => c.adventure === adventure.id);
           
           if (char) {
             setCharacterId(char.id);
-            // Start the adventure
             startAdventure(char.id);
           } else {
             setError("No character found for this adventure");
@@ -65,7 +61,6 @@ function ActiveAdventure () {
     }
   }, [adventure, user]);
 
-  // Start adventure - get initial AI response
   async function startAdventure(charId) {
     setLoading(true);
     try {
@@ -92,7 +87,6 @@ function ActiveAdventure () {
     }
   }
 
-  // Send user input and get AI response
   async function send(e) {
     e.preventDefault();
     
@@ -109,9 +103,7 @@ function ActiveAdventure () {
           'X-CSRFToken': getCsrfToken()
         },
         credentials: 'include',
-        body: JSON.stringify({
-          input: resText
-        })
+        body: JSON.stringify({ input: resText })
       });
 
       if (response.ok) {
