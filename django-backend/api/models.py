@@ -11,7 +11,7 @@ class User(AbstractUser):
         return self.username
     
     
-class Adventure(models.Models):
+class Adventure(models.Model):
     '''Adventure - the story container'''
 
     title = models.CharField(max_length=200)

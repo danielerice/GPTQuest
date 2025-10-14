@@ -138,3 +138,6 @@ SESSION_COOKIE_SAMESITE = 'Lax'
 
 # Anthropic API Key
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
+
+# User Auth
+AUTH_USER_MODEL = 'api.User'
